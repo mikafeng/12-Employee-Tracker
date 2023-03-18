@@ -67,6 +67,10 @@ const firstPrompt = () => {
             case 'Update an employee role':
                 updateEmployee();
                 break;
+
+            case 'exit':
+                db.end();
+                break;
                 
         }
     });
@@ -78,9 +82,10 @@ function viewDept() {
     console.log("Viewing Departments\n");
 
     db.query('select * from department', (err, data) => {
-        console.log(data);
+        err ? err.status(500) : 
+        console.table(data);
+        firstPrompt();
     })
-
 };
 
 app.listen(PORT, () => {
