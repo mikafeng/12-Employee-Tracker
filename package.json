@@ -1,0 +1,33 @@
+{
+  "name": "12-employeetracker",
+  "version": "1.0.0",
+  "description": "employee tracker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mikafeng/12-Employee-Tracker.git"
+  },
+  "keywords": [
+    "mysql",
+    "inquirer"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mikafeng/12-Employee-Tracker/issues"
+  },
+  "homepage": "https://github.com/mikafeng/12-Employee-Tracker#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "inquirer": "^9.1.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.2.0",
+    "path": "^0.12.7"
+  }
+}

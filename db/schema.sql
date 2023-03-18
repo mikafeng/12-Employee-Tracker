@@ -1,28 +1,24 @@
-DROP DATABASE IF EXISTS tracker_db;
+DROP DATABASE IF EXISTS system_db;
+CREATE DATABASE system_db;
 
-CREATE DATABASE tracker_db;
+USE system_db;
 
-USE tracker_db;
-
-CREATE TABLE departments (
-    id INT NOT NULL AUTO_INCREMENT,
-    name VARCHAR(30) NOT NULL,
-    PRIMARY KEY (id)
+CREATE TABLE department (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    dept_name VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE roles (
-    id INT(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE employee_role (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(30) NOT NULL,
-    salary DECIMAL(10,2) NOT NULL,
-    department_id INT(10) NOT NULL,
-    PRIMARY KEY (id)
+    salary INT NOT NULL,
+    department_id INT NOT NULL
 );
 
-CREATE TABLE employees (
-    id INT(10) NOT NULL AUTO_INCREMENT,
+CREATE TABLE employee (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(30) NOT NULL,
     last_name VARCHAR(30) NOT NULL,
-    role_id INT(10) NOT NULL,
-    manager_id INT(10),
-    PRIMARY KEY (id)
-)
+    role_id INT NOT NULL,
+    manager_id INT
+);

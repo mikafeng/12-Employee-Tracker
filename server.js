@@ -1,8 +1,6 @@
 //packages 
 const express = require('express');
 const mysql = require('mysql2')
-const inquirer = require('inquirer');
-const fs = require('fs');
 const path = require('path');
 
 
@@ -20,7 +18,7 @@ const db = mysql.createConnection(
         password: '1020&Git',
         database: 'employee_db'
     },
-    console.log(`Connected to the employee_db database.`)
+    console.log(`Connected to the system_db database.`)
 );
 
 app.listen(PORT, () => {
