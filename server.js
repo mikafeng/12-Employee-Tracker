@@ -38,7 +38,8 @@ const firstPrompt = () => {
             'Update an employee role'
         ],
     })
-    .then((selection) => {
+    .
+    then((selection) => {
         switch (selection.selection) {
             case 'View all departments':
                 viewDept();
@@ -107,6 +108,37 @@ function viewEmployee() {
         firstPrompt();
     })
 };
+
+function addDept() {
+    
+    inquirer.prompt([
+        {
+        type: 'input',
+        name: 'dept_id',
+        message: 'Enter Department id'
+        }, 
+        {
+        type: 'input',
+        name: 'dept_name', 
+        message: 'Enter Department name'
+        }
+    ])
+    .then((answer) => {
+        db.query(`insert into department set ?`, [answer], (err, result) => {
+        err ? console.log(err) :
+         console.table(result);
+        })
+    })
+
+}
+    
+    // db.query('insert into department (id, name) values ('dept_id', 'dept_name'), (err, data) => {
+    //  
+        firstPrompt();
+
+    
+
+
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
