@@ -88,6 +88,26 @@ function viewDept() {
     })
 };
 
+function viewRole() {
+    console.log("Viewing Roles\n");
+
+    db.query('select * from role', (err, data) => {
+        err ? err.status(500) :
+            console.table(data);
+        firstPrompt();
+    })
+};
+
+function viewEmployee() {
+    console.log("Viewing Employees\n");
+
+    db.query('select * from employee', (err, data) => {
+        err ? err.status(500) :
+            console.table(data);
+        firstPrompt();
+    })
+};
+
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
