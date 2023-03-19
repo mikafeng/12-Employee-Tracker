@@ -12,6 +12,7 @@ In command line:
 - run `npm i` to get all dependencies needed for project
 - install the following dependencies using `npm i` : `inquirer`, `mysql2`, `console.table`
 - connect to mysql database with `mysql -u root -p` using your password
+- create database by running `source` + the relataive path (or path) from the source file then the seed file
 
 ## Use
 Run npm start or node server.js to start up application
