@@ -2,7 +2,6 @@
 const express = require('express');
 const mysql = require('mysql2');
 const inquirer = require('inquirer');
-const path = require('path');
 
 
 const PORT = process.env.PORT || 3001;
@@ -12,6 +11,7 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
+//mysql connection
 const db = mysql.createConnection(
     {
         host: 'localhost',
@@ -22,6 +22,7 @@ const db = mysql.createConnection(
     console.log(`Connected to the system_db database.`)
 );
 
+//inquirer main prompts
 const firstPrompt = () => {
 
     inquirer.prompt ({
@@ -76,15 +77,13 @@ const firstPrompt = () => {
         }
     });
 }
-//Invoke first Prompt
-// firstPrompt();
 
 //VIEW DEPARTMENT
 function viewDept() {
     console.log("Viewing Departments\n");
 
     db.query('select * from department', (err, data) => {
-        err ? err.status(500) : 
+        err ? console.log(err) :
         console.table(data);
         firstPrompt();
     })
@@ -95,7 +94,7 @@ function viewRole() {
     console.log("Viewing Roles\n");
 
     db.query('select * from role', (err, data) => {
-        err ? err.status(500) :
+        err ? console.log(err) :
             console.table(data);
         firstPrompt();
     })
@@ -106,7 +105,7 @@ function viewEmployee() {
     console.log("Viewing Employees\n");
 
     db.query('select * from employee', (err, data) => {
-        err ? err.status(500) :
+        err ? console.log(err) :
             console.table(data);
         firstPrompt();
     })
@@ -119,7 +118,7 @@ function addDept() {
         {
         type: 'input',
         name: 'dept_name', 
-        message: 'Enter Department name'
+        message: 'Enter Department Name'
         }
     ])
     .then((answer) => {
@@ -127,6 +126,7 @@ function addDept() {
         db.query(`
         insert into department set ? `, [answer], (err, data) => {
         err ? console.log(err) :
+        console.log('Department Added')
          firstPrompt();
         })
     })
@@ -156,8 +156,7 @@ function addDept() {
                 db.query(`
                 insert into role set ?`, [answer], (err, result) => {
                     err ? console.log(err) :
-                        console.log('role added!')
-                        // console.table(result)
+                        console.log('Role Added')
                         firstPrompt();
                 })
             });
@@ -191,7 +190,7 @@ function addDept() {
         .then((answer) => {
             db.query(`insert into employee set ?`, [answer], (err, result) => {
              err ? console.log(err) :
-            console.log('Employee added!')
+            console.log('Employee Added')
             firstPrompt();
                     })
                 });
@@ -212,7 +211,7 @@ function addDept() {
             {
                 type: 'input',
                 name: 'role_id',
-                message: 'Update role id'
+                message: 'Update Role Id'
             }
 
         ])
@@ -221,22 +220,14 @@ function addDept() {
                 let y = answer
                 db.query(`update employee set role_id = ${x.role_id} where employee_id = ${y.employee_id}`, (err, result) => {
                     err ? console.log(err) :
-                        console.log('Employee added!')
+                        console.log('Employee Updated')
                     firstPrompt();
                 })
             });
-    }
+    };
     
 
-
-    
-    // db.query('insert into department (id, name) values ('dept_id', 'dept_name'), (err, data) => {
-    //  
-        firstPrompt();
-
-    
-
-
+ firstPrompt();
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
