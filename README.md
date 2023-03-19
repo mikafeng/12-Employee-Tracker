@@ -1,4 +1,4 @@
-# 12-Employee-Tracker
+## 12-Employee-Tracker
 A command-line application to manage a company's employee database, using Node.js, Inquirer, and MySQL.
 Users can view departments, roles and employees.
 Users can add a department, role or employee and update an employee's role id to change their title.
@@ -17,3 +17,6 @@ In command line:
 Run npm start or node server.js to start up application
 Use arrow keys to move up and down the list
 Hit enter to select a prompt
+
+# Example View
+<img width="542" alt="employee-tracker" src="https://user-images.githubusercontent.com/110942241/226195556-1fd37bf7-6adb-4853-ae9e-246b38f24e78.png">
