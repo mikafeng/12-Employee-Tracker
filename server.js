@@ -76,9 +76,10 @@ const firstPrompt = () => {
         }
     });
 }
+//Invoke first Prompt
+// firstPrompt();
 
-firstPrompt();
-
+//VIEW DEPARTMENT
 function viewDept() {
     console.log("Viewing Departments\n");
 
@@ -89,6 +90,7 @@ function viewDept() {
     })
 };
 
+//VIEW ROLE
 function viewRole() {
     console.log("Viewing Roles\n");
 
@@ -99,6 +101,7 @@ function viewRole() {
     })
 };
 
+//VIEW EMPLOYEE
 function viewEmployee() {
     console.log("Viewing Employees\n");
 
@@ -109,14 +112,10 @@ function viewEmployee() {
     })
 };
 
+//ADD DEPARTMENT
 function addDept() {
     
     inquirer.prompt([
-        {
-        type: 'input',
-        name: 'dept_id',
-        message: 'Enter Department id'
-        }, 
         {
         type: 'input',
         name: 'dept_name', 
@@ -124,13 +123,112 @@ function addDept() {
         }
     ])
     .then((answer) => {
-        db.query(`insert into department set ?`, [answer], (err, result) => {
+        console.log(answer);
+        db.query(`
+        insert into department set ? `, [answer], (err, data) => {
         err ? console.log(err) :
-         console.table(result);
+         firstPrompt();
         })
     })
+};
 
-}
+//ADD ROLE
+    function addRole() {
+
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'salary',
+                message: 'Enter Employee Salary'
+            },
+            {
+                type: 'input',
+                name: 'title',
+                message: 'Enter Employee Title'
+            },
+            {
+                type: 'input',
+                name: 'dept_id',
+                message: 'Enter Departent Id'
+            }
+        ])
+            .then((answer) => {
+                db.query(`
+                insert into role set ?`, [answer], (err, result) => {
+                    err ? console.log(err) :
+                        console.log('role added!')
+                        // console.table(result)
+                        firstPrompt();
+                })
+            });
+    };
+
+//ADD EMPLOYEE
+ function addEmployee() {
+
+    inquirer.prompt([
+            {
+                type: 'input',
+                name: 'first_name',
+                message: 'Enter Employee First Name'
+             },
+             {
+               type: 'input',
+               name: 'last_name',
+               message: 'Enter Employee Last Name'
+              },
+            {
+                type: 'input',
+                name: 'role_id',
+                message: 'Enter Employee Role Id'
+            },
+        {
+            type: 'input',
+            name: 'manager_id',
+            message: 'Enter Employee Manager Id'
+        }
+            ])
+        .then((answer) => {
+            db.query(`insert into employee set ?`, [answer], (err, result) => {
+             err ? console.log(err) :
+            console.log('Employee added!')
+            firstPrompt();
+                    })
+                });
+            };
+    
+    function updateEmployee() {
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'employee_id',
+                message: 'Employee Id to update?',
+            },            
+            // {
+            //     type: 'number',
+            //     name: 'manager_id',
+            //     message: 'Update manager id'
+            // }
+            {
+                type: 'input',
+                name: 'role_id',
+                message: 'Update role id'
+            }
+
+        ])
+            .then((answer) => {
+                let x = answer
+                let y = answer
+                db.query(`update employee set role_id = ${x.role_id} where employee_id = ${y.employee_id}`, (err, result) => {
+                    err ? console.log(err) :
+                        console.log('Employee added!')
+                    firstPrompt();
+                })
+            });
+    }
+    
+
+
     
     // db.query('insert into department (id, name) values ('dept_id', 'dept_name'), (err, data) => {
     //  
